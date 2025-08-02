@@ -1,0 +1,20 @@
+.headerBarContainer {
+  background-color: salmon;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .appTitle {
+    width: 80%;
+  }
+
+  .appLogo {
+    width: 20%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+}
