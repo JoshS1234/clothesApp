@@ -1,33 +1,8 @@
-import React from "react";
-import "./MyClothingItems.scss";
 import { v4 as uuidv4 } from "uuid";
-
+import type { ClothingItem } from "../types/types";
 const uuid = uuidv4();
 
-type FormalityObject = {
-  isFormal: boolean;
-  isSmart: boolean;
-  isCasual: boolean;
-  isSportswear: boolean;
-  isLeisureWear: boolean;
-  isNightwear: boolean;
-  isWorkwear: boolean;
-};
-
-type ClothingItem = {
-  id: string;
-  name: string;
-  whereWorn: string;
-  description: string;
-  brand: string;
-  formality: FormalityObject;
-  isInLaundry: boolean;
-  picture: string;
-  isWaterproof: boolean;
-  colour: string;
-};
-
-const clothesList: Array<ClothingItem> = [
+export const mockClothesList: Array<ClothingItem> = [
   {
     id: uuidv4(),
     name: "White tunic",
@@ -51,10 +26,10 @@ const clothesList: Array<ClothingItem> = [
   },
   {
     id: uuidv4(),
-    name: "Brown tunic",
-    whereWorn: "topLayer1",
-    description: "light coloured tunic-style top",
-    brand: "ASOS",
+    name: "Leather overcoat",
+    whereWorn: "topLayer3",
+    description: "heavy leather jacket",
+    brand: "blue rinse",
     formality: {
       isFormal: false,
       isSmart: true,
@@ -66,7 +41,49 @@ const clothesList: Array<ClothingItem> = [
     },
     isInLaundry: false,
     picture:
-      "https://i.etsystatic.com/60378154/r/il/8bf8ce/7058690891/il_300x300.7058690891_99uk.jpg",
+      "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR1AIf9JWrhaSklXtnXFpWbj3vKVqVfSyKLNyjwgLGfNpq2A9uQqiNVD1Dp_aO6Qz5EDkTq7MFUtGnBLDKR2hSbnPKGPijQLgg1RNXo68kB_XHCZazNMQ2nCUIOzx2mHhCOkcy8ahQ&usqp=CAc",
+    isWaterproof: true,
+    colour: "Brown",
+  },
+  {
+    id: uuidv4(),
+    name: "White trainers",
+    whereWorn: "shoes",
+    description: "white sports trainers",
+    brand: "adidas",
+    formality: {
+      isFormal: false,
+      isSmart: true,
+      isCasual: true,
+      isSportswear: false,
+      isLeisureWear: false,
+      isNightwear: false,
+      isWorkwear: false,
+    },
+    isInLaundry: false,
+    picture:
+      "data:image/webp;base64,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",
+    isWaterproof: false,
+    colour: "White",
+  },
+  {
+    id: uuidv4(),
+    name: "Grey quarter zip jumper",
+    whereWorn: "topLayer2",
+    description: "grey quarter zip jumper",
+    brand: "slazenger",
+    formality: {
+      isFormal: false,
+      isSmart: true,
+      isCasual: true,
+      isSportswear: false,
+      isLeisureWear: false,
+      isNightwear: false,
+      isWorkwear: false,
+    },
+    isInLaundry: false,
+    picture:
+      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRqjiAUHTNWOYMgp03GMOs1Umgd4-Y-M5bJmqQdL6eL4pQ9hNQKTlHGkYd43ZIGVRpRl6lYZl0a5-rYDDazV_cES1HI013Lp7NBj7_2YAgKDbNm6c1Or1pPtTAtaSl5bi1a_Lecut0&usqp=CAc",
     isWaterproof: false,
     colour: "dark brown",
   },
@@ -113,34 +130,3 @@ const clothesList: Array<ClothingItem> = [
     colour: "dark brown",
   },
 ];
-
-const MyClothingItems = () => {
-  return (
-    <div className="clothingCardContainer">
-      {clothesList.map((clothes) => {
-        return (
-          <div className="clothingItemCard">
-            <div className="clothingItemCard_infoContainer">
-              <h2 className="clothingItemCard_clothingItemTitle">
-                {clothes.name}
-              </h2>
-              <h5 className="clothingItemCard_clothingItemInfo">
-                {clothes.brand}
-              </h5>
-              <h5 className="clothingItemCard_clothingItemInfo">
-                ID: {clothes.id.slice(0, 5)}
-              </h5>
-            </div>
-
-            <img
-              src={clothes.picture}
-              className="clothingItemCard_clothingItemImage"
-            />
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export default MyClothingItems;
