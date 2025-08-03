@@ -5,15 +5,15 @@ import "./Nav.scss";
 const Nav = () => {
   return (
     <div className="nav">
-      <button className="navButton">
-        <Link to="/">Home</Link>
-      </button>
-      <button className="navButton">
-        <Link to="/outfits">Outfits</Link>
-      </button>
-      <button className="navButton">
-        <Link to="/user">User</Link>
-      </button>
+      <Link to="/" className="navButton">
+        <button>Home</button>
+      </Link>
+      <Link to="/outfits" className="navButton">
+        <button>Outfits</button>
+      </Link>
+      <Link to="/user" className="navButton">
+        <button>User</button>
+      </Link>
     </div>
   );
 };
