@@ -1,13 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 import type { ClothingItem } from "../types/types";
-const uuid = uuidv4();
 
 export const mockClothesList: Array<ClothingItem> = [
   {
     id: uuidv4(),
     name: "White tunic",
-    whereWorn: "topLayer1",
-    description: "light coloured tunic-style top",
+    placement: "Torso",
+    description: "light colored tunic-style top",
     brand: "ASOS",
     formality: {
       isFormal: false,
@@ -19,15 +18,15 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    picture:
+    pictureUrl:
       "//img.ltwebstatic.com/v4/j/spmp/2025/04/29/68/1745918294ee37bb6f5925a3858e2d3b1030ed6212_thumbnail_900x.webp",
     isWaterproof: false,
-    colour: "cream",
+    color: "White",
   },
   {
     id: uuidv4(),
     name: "Leather overcoat",
-    whereWorn: "topLayer3",
+    placement: "Torso",
     description: "heavy leather jacket",
     brand: "blue rinse",
     formality: {
@@ -40,15 +39,15 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    picture:
+    pictureUrl:
       "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcR1AIf9JWrhaSklXtnXFpWbj3vKVqVfSyKLNyjwgLGfNpq2A9uQqiNVD1Dp_aO6Qz5EDkTq7MFUtGnBLDKR2hSbnPKGPijQLgg1RNXo68kB_XHCZazNMQ2nCUIOzx2mHhCOkcy8ahQ&usqp=CAc",
     isWaterproof: true,
-    colour: "Brown",
+    color: "Brown",
   },
   {
     id: uuidv4(),
     name: "White trainers",
-    whereWorn: "shoes",
+    placement: "Feet",
     description: "white sports trainers",
     brand: "adidas",
     formality: {
@@ -61,15 +60,15 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    picture:
+    pictureUrl:
       "data:image/webp;base64,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",
     isWaterproof: false,
-    colour: "White",
+    color: "White",
   },
   {
     id: uuidv4(),
     name: "Grey quarter zip jumper",
-    whereWorn: "topLayer2",
+    placement: "Torso",
     description: "grey quarter zip jumper",
     brand: "slazenger",
     formality: {
@@ -82,16 +81,16 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    picture:
+    pictureUrl:
       "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRqjiAUHTNWOYMgp03GMOs1Umgd4-Y-M5bJmqQdL6eL4pQ9hNQKTlHGkYd43ZIGVRpRl6lYZl0a5-rYDDazV_cES1HI013Lp7NBj7_2YAgKDbNm6c1Or1pPtTAtaSl5bi1a_Lecut0&usqp=CAc",
     isWaterproof: false,
-    colour: "dark brown",
+    color: "Brown",
   },
   {
     id: uuidv4(),
     name: "Green tunic",
-    whereWorn: "topLayer1",
-    description: "light coloured tunic-style top",
+    placement: "Torso",
+    description: "light colored tunic-style top",
     brand: "ASOS",
     formality: {
       isFormal: false,
@@ -103,16 +102,16 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    picture:
+    pictureUrl:
       "data:image/webp;base64,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",
     isWaterproof: false,
-    colour: "cream",
+    color: "Green",
   },
   {
     id: uuidv4(),
     name: "Green kilt",
-    whereWorn: "legwear",
-    description: "light coloured tunic-style top",
+    placement: "Legs",
+    description: "light colored tunic-style top",
     brand: "ASOS",
     formality: {
       isFormal: false,
@@ -124,9 +123,9 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    picture:
+    pictureUrl:
       "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcTdF4iRXwk2j3U4CEuVSvzI2PbAKA9VO_0q1n3FhGQwOOm5gt461iC_PSykn-ZCoqVR7DaPIcHfjaR05zISXO3YnFST0ndmJCmD7CJ6A_ikWqkH41unb3mGj8svadiwidyOV5eXTN4&usqp=CAc",
     isWaterproof: false,
-    colour: "dark brown",
+    color: "Green",
   },
 ];

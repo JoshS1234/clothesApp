@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 const MyClothingItems = () => {
   return (
     <div className="clothingCardContainer">
+      <Link to={`/outfits/myClothingItems/add`} className="generalUseButton">
+        Add more...
+      </Link>
       {mockClothesList.map((clothing) => {
         return (
           <div className="clothingItemCard">
@@ -13,7 +16,7 @@ const MyClothingItems = () => {
               {clothing.name} - {clothing.brand}
             </h4>
             <img
-              src={clothing.picture}
+              src={clothing.pictureUrl}
               className="clothingItemCard_clothingItemImage"
             />
             <div className="clothingItemCard_buttonContainer">

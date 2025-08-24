@@ -7,6 +7,13 @@
   height: 100%;
   overflow: scroll;
 
+  .generalUseButton {
+    background-color: beige;
+    padding: 3px;
+    width: 40%;
+    margin: 5px 0px 5px 0px;
+  }
+
   .clothingItemCard {
     background-color: beige;
     height: fit-content;

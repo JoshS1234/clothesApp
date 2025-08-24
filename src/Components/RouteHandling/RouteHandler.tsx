@@ -11,6 +11,7 @@ import Laundry from "../OutfitsPage/Laundry";
 import SpecificClothingItem from "../OutfitsPage/ClothingItems/SpecificClothingItem";
 import EditSpecificClothingItem from "../OutfitsPage/ClothingItems/EditSpecificClothingItem";
 import DeleteSpecificClothingItem from "../OutfitsPage/ClothingItems/DeleteSpecificClothingItem";
+import AddNewClothingItem from "../OutfitsPage/ClothingItems/AddNewClothingItem";
 
 const RouteHandler = () => {
   return (
@@ -31,6 +32,10 @@ const RouteHandler = () => {
         <Route
           path="/outfits/myClothingItems/:clothingId/delete"
           element={<DeleteSpecificClothingItem />}
+        />
+        <Route
+          path="/outfits/myClothingItems/add"
+          element={<AddNewClothingItem />}
         />
         <Route path="/outfits/laundry" element={<Laundry />} />
 
