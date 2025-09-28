@@ -16,7 +16,16 @@ export const getClothingItemsFromDB = () => {
 export const addToDB = (clothingItem: ClothingItem) => {
   return getClothingItemsFromDB().then((data) => {
     data.push(clothingItem);
-    console.log(data);
+    updateDoc(docRef, { clothing: data });
+  });
+};
+
+export const deleteFromDB = (clothingItem: ClothingItem) => {
+  getClothingItemsFromDB().then((data) => {
+    data = data.filter((clothingItemFromList: ClothingItem) => {
+      return clothingItemFromList.id != clothingItem.id;
+    });
+
     updateDoc(docRef, { clothing: data });
   });
 };

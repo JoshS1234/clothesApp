@@ -16,9 +16,11 @@ import {
 } from "../../../assets/utils/outfitTools";
 import { useState } from "react";
 import { addToDB } from "../../../assets/utils/dbTools";
+import { useNavigate } from "react-router-dom";
 
 const AddNewClothingItem = () => {
   let tempClothingItem = generateNewBlankClothingItem();
+  const navigate = useNavigate();
 
   const [id, setId] = useState(tempClothingItem.id);
   const [name, setName] = useState<string>(tempClothingItem.name);
@@ -54,12 +56,16 @@ const AddNewClothingItem = () => {
     clothingItemCopy.formality = createFormalityObject(formality);
     clothingItemCopy.color = color as Color;
     clothingItemCopy.isWaterproof = isWaterproof;
+    clothingItemCopy.id = id;
 
-    addToDB(clothingItemCopy);
+    addToDB(clothingItemCopy).then(() => {
+      navigate("/outfits/myClothingItems", { replace: true });
+    });
     //Add functionality to link this to the finished page
     //add functionality to upload photo
     //add edit page for completed items
     //remove console logs
+    //add error handling and checks for missing fields
   };
 
   return (
