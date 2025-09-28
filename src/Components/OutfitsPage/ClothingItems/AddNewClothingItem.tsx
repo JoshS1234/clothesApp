@@ -1,10 +1,9 @@
 import React, { use } from "react";
 import "./AddNewClothingItem.scss";
 import type {
-  ClothingItem,
   Placement,
-  Formality,
   Color,
+  ClothingItem,
 } from "../../../assets/types/types";
 import {
   formalityOptions,
@@ -16,11 +15,11 @@ import {
   createFormalityObject,
 } from "../../../assets/utils/outfitTools";
 import { useState } from "react";
+import { addToDB } from "../../../assets/utils/dbTools";
 
 const AddNewClothingItem = () => {
   let tempClothingItem = generateNewBlankClothingItem();
 
-  const [clothingItem, setClothingItem] = useState(tempClothingItem);
   const [id, setId] = useState(tempClothingItem.id);
   const [name, setName] = useState<string>(tempClothingItem.name);
   const [PictureUrl, setPictureUrl] = useState<string>(
@@ -30,7 +29,7 @@ const AddNewClothingItem = () => {
     tempClothingItem.placement
   );
   const [description, setDescription] = useState<string>(
-    clothingItem.description
+    tempClothingItem.description
   );
   const [brand, setBrand] = useState<string>(tempClothingItem.brand);
   //ManualSetting for these is not ideal
@@ -40,11 +39,11 @@ const AddNewClothingItem = () => {
     tempClothingItem.isWaterproof
   );
 
-  const handleSubmit = (event) => {
-    console.log(event);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
+  const handleSubmit = () => {
     //add validations to prevent null/invalid text
-    const clothingItemCopy = { ...clothingItem };
+    const clothingItemCopy = { ...tempClothingItem };
     clothingItemCopy.name = name;
     clothingItemCopy.pictureUrl = PictureUrl;
     //add error handling here
@@ -56,10 +55,7 @@ const AddNewClothingItem = () => {
     clothingItemCopy.color = color as Color;
     clothingItemCopy.isWaterproof = isWaterproof;
 
-    console.log(clothingItemCopy);
-
-    setClothingItem(clothingItemCopy);
-
+    addToDB(clothingItemCopy);
     //Add functionality to link this to the finished page
     //add functionality to upload photo
     //add edit page for completed items
@@ -95,8 +91,6 @@ const AddNewClothingItem = () => {
         <select
           value={placement}
           onChange={(event) => {
-            console.log(event.target.value);
-
             setPlacement(event.target.value);
           }}
         >
@@ -110,8 +104,6 @@ const AddNewClothingItem = () => {
         <input
           type="text"
           onChange={(event) => {
-            console.log(event.target.value);
-
             setDescription(event.target.value);
           }}
         />
@@ -121,8 +113,6 @@ const AddNewClothingItem = () => {
         <input
           type="text"
           onChange={(event) => {
-            console.log(event.target.value);
-
             setBrand(event.target.value);
           }}
         />
@@ -132,8 +122,6 @@ const AddNewClothingItem = () => {
         <select
           value={formality}
           onChange={(event) => {
-            console.log(event.target.value);
-
             setFormality(event.target.value);
           }}
         >
@@ -147,8 +135,6 @@ const AddNewClothingItem = () => {
         <select
           value={color}
           onChange={(event) => {
-            console.log(event.target.value);
-
             setColor(event.target.value);
           }}
         >
@@ -162,8 +148,6 @@ const AddNewClothingItem = () => {
         <input
           type="checkbox"
           onChange={(event) => {
-            console.log(event.target.checked);
-
             setIsWaterproof(event.target.checked);
           }}
         />
@@ -172,8 +156,8 @@ const AddNewClothingItem = () => {
       <div className="buttonContainer">
         <button
           className="buttonContainer_button"
-          onClick={(event) => {
-            handleSubmit(event);
+          onClick={() => {
+            handleSubmit();
           }}
         >
           Submit

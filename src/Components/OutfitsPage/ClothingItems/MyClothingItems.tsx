@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MyClothingItems.scss";
-import { mockClothesList } from "../../../assets/mockData/mockClothesList";
+// import { mockClothesList } from "../../../assets/mockData/mockClothesList";
 import { Link } from "react-router-dom";
+import { db } from "../../../../firebaseSetup";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import type { ClothingItem } from "../../../assets/types/types";
+import { getClothingItemsFromDB } from "../../../assets/utils/dbTools";
 
 const MyClothingItems = () => {
+  const [mockClothesList, setMockClothesList] = useState<Array<ClothingItem>>(
+    []
+  );
+
+  useEffect(() => {
+    getClothingItemsFromDB().then((data) => {
+      console.log(data);
+      setMockClothesList(data);
+    });
+  }, []);
+
   return (
     <div className="clothingCardContainer">
       <Link to={`/outfits/myClothingItems/add`} className="generalUseButton">

@@ -18,8 +18,7 @@ export const mockClothesList: Array<ClothingItem> = [
       isWorkwear: false,
     },
     isInLaundry: false,
-    pictureUrl:
-      "//img.ltwebstatic.com/v4/j/spmp/2025/04/29/68/1745918294ee37bb6f5925a3858e2d3b1030ed6212_thumbnail_900x.webp",
+    pictureUrl: "                                               ",
     isWaterproof: false,
     color: "White",
   },
